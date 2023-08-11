@@ -1,0 +1,12 @@
+
+services:
+  postgres:
+    container_name: postgres-15
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=simplesuser
+      - POSTGRES_PASSWORD=simplepass
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
