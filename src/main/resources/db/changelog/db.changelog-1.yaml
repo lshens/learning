@@ -38,46 +38,6 @@ databaseChangeLog:
                 constraintName: pk_user_roles
                 tableName: user_roles
             - createTable:
-                tableName: addresses
-                columns:
-                  - column:
-                      name: id
-                      type: VARCHAR(36)
-                  - column:
-                      name: postal_code
-                      type: VARCHAR
-                  - column:
-                      name: city
-                      type: VARCHAR
-                  - column:
-                      name: country
-                      type: VARCHAR
-                  - column:
-                      name: street
-                      type: VARCHAR
-                  - column:
-                      name: latitude
-                      type: NUMBER
-                  - column:
-                      name: longitude
-                      type: NUMBER
-            - addPrimaryKey:
-                columnNames: id
-                constraintName: pk_addresses
-                tableName: addresses
-            - addNotNullConstraint:
-                columnName: postal_code
-                constraintName: not_null_addresses_postal_code
-                tableName: addresses
-            - addNotNullConstraint:
-                columnName: city
-                constraintName: not_null_addresses_city
-                tableName: addresses
-            - addNotNullConstraint:
-                columnName: street
-                constraintName: not_null_addresses_street
-                tableName: addresses
-            - createTable:
                 tableName: courses
                 columns:
                   - column:
@@ -154,20 +114,11 @@ databaseChangeLog:
                       name: phone_number
                       type: VARCHAR(15)
                   - column:
-                      name: address_id
-                      type: VARCHAR(36)
-                  - column:
-                      name: type
-                      type: VARCHAR(7)
-                  - column:
                       name: secret
                       type: VARCHAR
                   - column:
                       name: status
                       type: VARCHAR # ACTIVE, INACTIVE
-                  - column:
-                      name: address_id
-                      type: VARCHAR(36)
             - addNotNullConstraint:
                 columnName: first_name
                 constraintName: not_null_users_first_name
@@ -208,12 +159,6 @@ databaseChangeLog:
                 columnNames: id
                 constraintName: pk_users
                 tableName: users
-            - addForeignKeyConstraint:
-                baseColumnNames: address_id
-                baseTableName:  users
-                constraintName: fk_user_addresses
-                referencedColumnNames:  id
-                referencedTableName:  addresses
             - createTable:
                 tableName: task_logs
                 columns:
@@ -251,5 +196,54 @@ databaseChangeLog:
                 constraintName: fk_task_logs_users
                 referencedColumnNames: id
                 referencedTableName: users
+            - createTable:
+                tableName: addresses
+                columns:
+                  - column:
+                      name: id
+                      type: VARCHAR(36)
+                  - column:
+                      name: postal_code
+                      type: VARCHAR
+                  - column:
+                      name: city
+                      type: VARCHAR
+                  - column:
+                      name: country
+                      type: VARCHAR
+                  - column:
+                      name: street
+                      type: VARCHAR
+                  - column:
+                      name: latitude
+                      type: FLOAT
+                  - column:
+                      name: longitude
+                      type: FLOAT
+                  - column:
+                      name: user_id
+                      type: VARCHAR(36)
+            - addPrimaryKey:
+                columnNames: id
+                constraintName: pk_addresses
+                tableName: addresses
+            - addNotNullConstraint:
+                columnName: postal_code
+                constraintName: not_null_addresses_postal_code
+                tableName: addresses
+            - addNotNullConstraint:
+                columnName: city
+                constraintName: not_null_addresses_city
+                tableName: addresses
+            - addNotNullConstraint:
+                columnName: street
+                constraintName: not_null_addresses_street
+                tableName: addresses
+            - addForeignKeyConstraint:
+                baseColumnNames: user_id
+                baseTableName:  addresses
+                constraintName: fk_addresses_users
+                referencedColumnNames:  id
+                referencedTableName:  users
 
 

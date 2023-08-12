@@ -42,7 +42,4 @@ public class UserPO {
     private String secret;
     @Enumerated(STRING)
     private UserStatusEnum status;
-    @OneToOne(fetch = LAZY)
-    @JoinColumn(name = "address_id", insertable = false, updatable = false)
-    private AddressPO address;
 }
