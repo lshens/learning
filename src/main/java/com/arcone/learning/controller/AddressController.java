@@ -24,12 +24,12 @@ public class AddressController {
 
     @PostMapping
     public AddressDTO create(@RequestBody AddressDTO address) {
-        return mapper.from(service.create(mapper.to(address)));
+        return mapper.from(service.create("id from security", mapper.to(address)));
     }
 
     @PutMapping
     public AddressDTO update(@RequestBody AddressDTO address) {
-        return mapper.from(service.update(mapper.to(address)));
+        return mapper.from(service.update("id from security", mapper.to(address)));
     }
 
     @GetMapping

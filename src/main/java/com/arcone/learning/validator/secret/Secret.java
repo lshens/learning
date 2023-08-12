@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = {SecretValidator.class})
 @Target({ElementType.FIELD, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidSecret {
+public @interface Secret {
     String message() default "The secret is invalid";
 }

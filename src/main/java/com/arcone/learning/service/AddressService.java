@@ -3,9 +3,9 @@ package com.arcone.learning.service;
 import com.arcone.learning.model.AddressPO;
 
 public interface AddressService {
-    AddressPO create(AddressPO address);
+    AddressPO create(String userId, AddressPO address);
 
-    AddressPO update(AddressPO address);
+    AddressPO update(String userId, AddressPO address);
 
     AddressPO find(String userId);
 }

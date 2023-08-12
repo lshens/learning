@@ -15,7 +15,7 @@ import static java.util.regex.Pattern.matches;
 import static org.springframework.http.HttpMethod.POST;
 
 @Component
-public class SecretValidator implements ConstraintValidator<ValidSecret, Object>, ApplicationContextAware {
+public class SecretValidator implements ConstraintValidator<Secret, String>, ApplicationContextAware {
     /**
      * The secret must have:
      * 1 number and
@@ -31,17 +31,12 @@ public class SecretValidator implements ConstraintValidator<ValidSecret, Object>
     }
 
     @Override
-    public void initialize(ValidSecret constraintAnnotation) {
-        ConstraintValidator.super.initialize(constraintAnnotation);
-    }
-
-    @Override
-    public boolean isValid(Object value, ConstraintValidatorContext context) {
+    public boolean isValid(String value, ConstraintValidatorContext context) {
         if (POST.equals(getHttpStatus())) {
-            if (isNull(value) || !(value instanceof String)) {
+            if (isNull(value) || value.isBlank()) {
                 return false;
             }
-            return matches(SECRET_PATTERN, (String) value);
+            return matches(SECRET_PATTERN, value);
         } else {
             return true;
         }

@@ -9,7 +9,6 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
 
     @Mapping(target = "status", ignore = true)
-    @Mapping(target = "address", ignore = true)
     UserPO to(UserDTO dto);
 
     @Mapping(target = "secret", ignore = true)
