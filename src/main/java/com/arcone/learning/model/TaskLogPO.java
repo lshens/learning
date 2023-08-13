@@ -5,15 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -40,11 +36,10 @@ public class TaskLogPO {
     private LocalDate inputDate;
     @Temporal(TIME)
     private LocalTime inputTime;
-    @ManyToOne
-    @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private UserPO user;
-    @ManyToOne
-    @JoinColumn(name = "category_id", insertable = false, updatable = false)
-    private TaskCategoryPO category;
-
+    @Column(name = "user_id")
+    private String userId;
+    @Column(name = "category_id")
+    private String categoryId;
+    @Column(name = "course_id")
+    private String courseId;
 }

@@ -7,14 +7,13 @@ import com.arcone.learning.model.CoursePO;
 import com.arcone.learning.repository.CourseRepository;
 import com.arcone.learning.service.CourseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static com.arcone.learning.builder.CourseStatusBuilder.builder;
 import static com.arcone.learning.model.CourseStatusEnum.EXPIRED;
@@ -24,10 +23,15 @@ import static org.springframework.data.domain.Sort.by;
 @RequiredArgsConstructor
 @Service
 public class CourseServiceImpl implements CourseService {
+    private static final int DEFAULT_START = 0;
     private final CourseRepository repository;
     private final CourseMapper mapper;
 
-    private final
+    @Value("${learning.course.sync.page-size:100}")
+    private int sizeSync;
+    @Value("${learning.course.months-to-expire:6}")
+    private int monthsToExpire;
+
     @Override
     public CoursePO create(CoursePO course) {
         validate(course);
@@ -49,11 +53,13 @@ public class CourseServiceImpl implements CourseService {
     @Scheduled(cron = "0 0 1 * * *")
     @Override
     public void sync() {
-        sync(of());
+        sync(of(DEFAULT_START, sizeSync));
     }
 
     private void sync(Pageable pageable) {
         Page<CoursePO> page = repository.findAllStatusNotEqual(EXPIRED, pageable);
+        page.forEach(this::setStatus);
+        repository.saveAll(page);
         if (page.hasNext()) {
             sync(page.nextPageable());
         }
@@ -66,7 +72,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     private CoursePO save(CoursePO course) {
-        course.setStatus(builder().start(course.getStartDate()).build());
+        setStatus(course);
         return repository.save(course);
+    }
+
+    private void setStatus(CoursePO course) {
+        course.setStatus(builder().monthsToExpire(monthsToExpire).start(course.getStartDate()).build());
     }
 }

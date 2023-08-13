@@ -17,8 +17,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 @Validated
 @RestController
-@RequestMapping(name = "/v1/addresses", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
-public class AddressController {
+@RequestMapping(name = "/v1/users/addresses", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+public class UserAddressController {
     private final AddressService service;
     private final AddressMapper mapper;
 

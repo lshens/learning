@@ -16,7 +16,7 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PRIVATE)
 public class CourseStatusBuilder {
     private LocalDate startDate;
-    private int monthsToExpire = 6;
+    private int monthsToExpire;
 
     public static CourseStatusBuilder builder() {
         return new CourseStatusBuilder();
