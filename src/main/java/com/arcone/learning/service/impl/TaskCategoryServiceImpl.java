@@ -1,5 +1,6 @@
 package com.arcone.learning.service.impl;
 
+import com.arcone.learning.exception.NotFoundException;
 import com.arcone.learning.model.TaskCategoryPO;
 import com.arcone.learning.repository.TaskCategoryRepository;
 import com.arcone.learning.service.TaskCategoryService;
@@ -18,5 +19,12 @@ public class TaskCategoryServiceImpl implements TaskCategoryService {
     @Override
     public List<TaskCategoryPO> findAll(int start, int end) {
         return repository.findAll(of(start, end)).getContent();
+    }
+
+    @Override
+    public void exists(String id) {
+       if (!repository.existsById(id)) {
+           throw new NotFoundException("The task category " + id + " does not exists.");
+       }
     }
 }

@@ -57,7 +57,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     private void sync(Pageable pageable) {
-        Page<CoursePO> page = repository.findAllStatusNotEqual(EXPIRED, pageable);
+        Page<CoursePO> page = repository.findAllByStatusIsNot(EXPIRED, pageable);
         page.forEach(this::setStatus);
         repository.saveAll(page);
         if (page.hasNext()) {

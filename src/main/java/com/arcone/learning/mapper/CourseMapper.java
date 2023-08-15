@@ -4,10 +4,14 @@ import com.arcone.learning.controller.dto.CourseDTO;
 import com.arcone.learning.model.CoursePO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.MappingTarget;
 
 import java.util.List;
 
-@Mapper
+import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
+
+@Mapper(componentModel = SPRING)
 public interface CourseMapper {
 
     CoursePO to(CourseDTO dto);
@@ -17,5 +21,5 @@ public interface CourseMapper {
     List<CourseDTO> from(List<CoursePO> pos);
 
     @Mapping(target = "id", ignore = true)
-    CoursePO merge(CoursePO newest, CoursePO oldest);
+    CoursePO merge(CoursePO newest, @MappingTarget CoursePO oldest);
 }

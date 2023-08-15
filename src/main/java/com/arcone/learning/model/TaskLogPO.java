@@ -9,15 +9,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static com.arcone.learning.util.IdUtil.uuid;
-import static javax.persistence.TemporalType.DATE;
-import static javax.persistence.TemporalType.TIME;
-import static javax.persistence.TemporalType.TIMESTAMP;
 
 @Data
 @NoArgsConstructor
@@ -30,11 +26,11 @@ public class TaskLogPO {
     @Id
     @Builder.Default
     private String id = uuid();
-    @Temporal(TIMESTAMP)
+    @Column(name = "change_date_time", columnDefinition = "TIMESTAMP")
     private LocalDateTime changeDateTime;
-    @Temporal(DATE)
+    @Column(name = "input_date", columnDefinition = "DATE")
     private LocalDate inputDate;
-    @Temporal(TIME)
+    @Column(name = "input_time", columnDefinition = "TIME")
     private LocalTime inputTime;
     @Column(name = "user_id")
     private String userId;

@@ -48,7 +48,7 @@ databaseChangeLog:
                 constraintName: not_null_courses_name
                 tableName: courses
             - addNotNullConstraint:
-                columnName: starts
+                columnName: start_date
                 constraintName: not_null_courses_start_date
                 tableName: courses
             - addUniqueConstraint:
@@ -121,10 +121,6 @@ databaseChangeLog:
             - addNotNullConstraint:
                 columnName: phone_number
                 constraintName: not_null_users_phone_number
-                tableName: users
-            - addNotNullConstraint:
-                columnName: type
-                constraintName: not_null_users_type
                 tableName: users
             - addNotNullConstraint:
                 columnName: secret
@@ -282,5 +278,3 @@ databaseChangeLog:
                 constraintName: fk_user_courses_roles
                 referencedColumnNames: id
                 referencedTableName: courses
-
-

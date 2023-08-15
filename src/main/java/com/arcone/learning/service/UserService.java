@@ -8,4 +8,6 @@ public interface UserService {
     UserPO update(UserPO user);
 
     UserPO find(String id);
+
+    String getId(String email);
 }

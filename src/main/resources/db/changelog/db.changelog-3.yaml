@@ -1,0 +1,41 @@
+databaseChangeLog:
+    - changeSet:
+          id: JIRA-TICKET-3
+          author: 'Lucas Shen'
+          changes:
+            - insert:
+                tableName: task_categories
+                columns:
+                  - column:
+                      name: id
+                      value: f47ac10b-58cc-4372-a567-0e02b2c3d479
+                  - column:
+                      name: type
+                      value: RESEARCHING
+                  - column:
+                      name: description
+                      value: 'Improving the knowledge by researching'
+            - insert:
+                tableName: task_categories
+                columns:
+                  - column:
+                      name: id
+                      value: c3c29106-7f91-4703-84b1-9731ce42db17
+                  - column:
+                      name: type
+                      value: PRACTICING
+                  - column:
+                      name: description
+                      value: 'Improving the knowledge by practicing'
+            - insert:
+                tableName: task_categories
+                columns:
+                  - column:
+                      name: id
+                      value: 3b8f8e9e-20cf-4b9d-a1b8-72673ae5020a
+                  - column:
+                      name: type
+                      value: WATCHING_VIDEOS
+                  - column:
+                      name: description
+                      value: 'Improving the knowledge by watching videos'

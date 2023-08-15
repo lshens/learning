@@ -1,0 +1,32 @@
+databaseChangeLog:
+    - changeSet:
+          id: JIRA-TICKET-4
+          author: 'Lucas Shen'
+          changes:
+            - insert:
+                tableName: users
+                columns:
+                  - column:
+                      name: id
+                      value: be0a7d3b-4e39-42ed-bd5e-07e2296dcab7
+                  - column:
+                      name: status
+                      value: ACTIVE
+                  - column:
+                      name: first_name
+                      value: berserk
+                  - column:
+                      name: last_name
+                      value: admin
+                  - column:
+                      name: date_birth
+                      value: 1989-08-25
+                  - column:
+                      name: phone_number
+                      value: '5512997796639'
+                  - column:
+                      name: email
+                      value: 'berserk@admin.com'
+                  - column:
+                      name: secret # 1qweqwe$
+                      value: '$2a$10$SGp/IotLJesxIoBh2b5ogOsFuHBAJ6pz2VhxJ6m109QBQ1sU983FC'

@@ -5,7 +5,6 @@ import com.arcone.learning.mapper.TaskCategoryMapper;
 import com.arcone.learning.service.TaskCategoryService;
 import com.arcone.learning.validator.query.RequestQuerySizeListValidator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,9 +15,8 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RequiredArgsConstructor
-@Validated
 @RestController
-@RequestMapping(name = "/v1/tasks", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/v1/tasks", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
 public class TaskController {
     private final TaskCategoryService service;
     private final TaskCategoryMapper mapper;

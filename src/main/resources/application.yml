@@ -1,3 +1,4 @@
+logging.level.org.springframework.security: DEBUG
 
 spring:
   jackson:
@@ -5,6 +6,6 @@ spring:
     deserialization:
       fail-on-unknown-properties: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/learning
-    username: simpleuser
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
     password: simplepass

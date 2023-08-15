@@ -10,12 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 import java.time.LocalDate;
 
 import static com.arcone.learning.util.IdUtil.uuid;
 import static javax.persistence.EnumType.STRING;
-import static javax.persistence.TemporalType.DATE;
 
 @Data
 @NoArgsConstructor
@@ -28,8 +26,7 @@ public class CoursePO {
     @Builder.Default
     private String id = uuid();
     private String name;
-    @Temporal(DATE)
-    @Column(name = "start_date")
+    @Column(name = "start_date", columnDefinition = "DATE")
     private LocalDate startDate;
     @Enumerated(STRING)
     private CourseStatusEnum status;

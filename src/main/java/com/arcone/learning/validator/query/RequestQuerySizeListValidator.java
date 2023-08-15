@@ -16,7 +16,7 @@ public class RequestQuerySizeListValidator {
         }
 
         if (end < 0) {
-            throw new ValidationException("The param start cannot be negative number");
+            throw new ValidationException("The param end cannot be negative number");
         }
 
         if (start >= end) {

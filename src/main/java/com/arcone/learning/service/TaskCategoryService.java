@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TaskCategoryService {
     List<TaskCategoryPO> findAll(int start, int end);
+
+    void exists(String id);
 }
