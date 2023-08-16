@@ -36,7 +36,7 @@ public class CourseStatusBuilder {
         if (isNull(startDate)) {
             throw new IllegalArgumentException("The start date of a course is required for having a status");
         }
-        if (startDate.isBefore(now())) {
+        if (startDate.isAfter(now())) {
             return QUEUE;
         } else if (startDate.isAfter(startDate.plusMonths(monthsToExpire))) {
             return EXPIRED;
