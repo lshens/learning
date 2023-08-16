@@ -3,6 +3,7 @@ package com.arcone.learning.configuration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
+
+import static org.springframework.http.HttpMethod.OPTIONS;
 
 @RequiredArgsConstructor
 @Configuration
@@ -35,11 +38,12 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filter(HttpSecurity http) throws Exception {
-        return http.cors()
-                .and()
+        return http.cors().disable()
                 .csrf().disable()
                 .authorizeHttpRequests()
+                .antMatchers(OPTIONS, "/v1/**").permitAll()
                 .antMatchers("/v1/users/sig-in").permitAll()
+                .antMatchers("/v1/users/levels").hasAnyAuthority("ADMIN", "STUDENT")
                 .antMatchers("/v1/courses/**").hasAuthority("ADMIN")
                 .antMatchers("/v1/users/**").hasAuthority("STUDENT")
                 .anyRequest().authenticated()

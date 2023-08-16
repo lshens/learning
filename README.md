@@ -10,6 +10,7 @@
 * JDK 11
 * Angular 11
   * Prime NG 11
+  * Node JS 16.19.1
 * Liquibase
 * Postgres 15
 * Docker Compose
