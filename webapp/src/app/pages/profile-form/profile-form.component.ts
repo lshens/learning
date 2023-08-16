@@ -1,34 +1,40 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LevelService } from '../../services/level.service';
 import { LevelEnum } from '../../models/level.enum.model';
-
 import { Subscription } from 'rxjs';
-import { SessionService } from '../../services/session.sevice';
+import { ProfileService } from '../../services/profile.service';
+import { SessionService } from 'src/app/services/session.sevice';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
+  selector: 'app-profile-form',
+  templateUrl: './profile-form.component.html'
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class ProfileFormComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({});
   loading: boolean = false;
+  maxDate: Date = new Date();
   error: boolean = false;
 
   private subscriptions: Subscription[] = [];
 
   constructor(
     private builder: FormBuilder,
-    private session: SessionService,
-    private service: LevelService,
-    private router: Router
+    private router: Router,
+    private service: ProfileService,
+    private session: SessionService
   ) {}
 
   ngOnInit(): void {
+    const maxYear = this.maxDate.getFullYear() - 16;
+    this.maxDate = new Date(maxYear, this.maxDate.getMonth(), this.maxDate.getDate());
     this.form = this.builder.group({
       email: ['', [Validators.required, Validators.email]],
       secret: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phoneNumber: ['', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~]).{8,}$')]],
+      dateBirth: ['', Validators.required]
     });
   }
 
@@ -42,13 +48,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       this.loading = true;
       const data = this.form.value;
-      this.session.secret = btoa(`${data.email}:${data.secret}`);
       this.subscriptions.push(
-        this.service.findAll().subscribe(
-          (levels: LevelEnum[]) => {
-            this.session.levels = levels;
+        this.service.create(data).subscribe(
+          () => {
             this.loading = false;
-            this.router.navigate(['/home']);
+            this.session.secret = btoa(`${data.email}:${data.secret}`);
           },
 
           (error) => {

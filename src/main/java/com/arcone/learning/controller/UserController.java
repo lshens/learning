@@ -24,7 +24,7 @@ public class UserController {
     private final UserMapper mapper;
     private final UserAuthentication authentication;
 
-    @PostMapping("/sig-in")
+    @PostMapping
     public UserDTO create(@Valid @RequestBody UserDTO user) {
         return mapper.from(service.create(mapper.to(user)));
     }

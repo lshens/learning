@@ -30,9 +30,7 @@ export class HttpHeaderService implements HttpInterceptor {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    console.log(!request.url.endsWith('sig-in'));
-    console.log(request.url);
-    if (!request.url.endsWith('sig-in')) {
+    if (!request.url.endsWith('/v1/users') && request.method != 'POST') {
       headers = headers.set('Authorization', `Basic ${this.session.secret}`);
     }
     return headers;

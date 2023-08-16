@@ -14,6 +14,7 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 @Mapper(componentModel = SPRING)
 public interface CourseMapper {
 
+    @Mapping(target = "id", ignore = true)
     CoursePO to(CourseDTO dto);
 
     CourseDTO from(CoursePO po);

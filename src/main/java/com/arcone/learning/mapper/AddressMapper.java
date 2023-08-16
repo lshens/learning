@@ -12,6 +12,7 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 public interface AddressMapper {
     @Mapping(target = "userId", ignore = true)
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "id", ignore = true)
     AddressPO to(AddressDTO user);
 
     AddressDTO from(AddressPO addressPO);

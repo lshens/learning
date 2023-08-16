@@ -1,0 +1,82 @@
+<p-blockUI [blocked]="loading" [target]="panel">
+  <i class="pi pi-spin pi-spinner" style="font-size: 3rem"></i>
+</p-blockUI>
+<div #panel class="flex align-items-center justify-content-center">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngIf="error" class="flex align-items-center justify-content-center p-3">
+      <p-message severity="error" text="Invalid credentials"></p-message>
+    </div>
+    <div class="flex align-items-center justify-content-center p-3">
+      <span class="p-float-label p-1">
+        <input
+          id="firstName"
+          type="text"
+          pInputText
+          formControlName="firstName"
+        />
+        <label for="firstName">First Name</label>
+      </span>
+      <span class="p-float-label p-1">
+        <input
+          id="lastName"
+          type="text"
+          pInputText
+          formControlName="lastName"
+        />
+        <label for="lastName">Last Name</label>
+      </span>
+    </div>
+    <div class="flex align-items-center justify-content-center p-3">
+      <span class="p-float-label">
+        <input
+          id="phoneNumber"
+          type="text"
+          pInputText
+          formControlName="phoneNumber"
+        />
+        <label for="phoneNumber">Phone Number</label>
+      </span>
+    </div>
+    <div class="flex align-items-center justify-content-center p-3">
+      <span class="p-float-label">
+        <p-calendar
+          id="dateBirth"
+          formControlName="dateBirth"
+          [maxDate]="maxDate"
+          [monthNavigator]="true"
+          [yearNavigator]="true"
+          [defaultDate]="maxDate"
+          yearRange="1980:2007"
+          dataType="string"
+        ></p-calendar>
+        <label for="dateBirth">Date of Birth</label>
+      </span>
+    </div>
+    <div class="flex align-items-center justify-content-center p-3">
+      <span class="p-float-label">
+        <input id="email" type="email" pInputText formControlName="email" />
+        <label for="email">E-mail</label>
+      </span>
+    </div>
+    <div class="flex align-items-center justify-content-center p-3">
+      <span class="p-float-label">
+        <input
+          id="secret"
+          type="password"
+          pInputText
+          formControlName="secret"
+        />
+        <label for="secret">Password</label>
+      </span>
+    </div>
+    <div class="flex align-items-center justify-content-center p-2">
+      <button
+        pButton
+        type="submit"
+        label="Submit"
+        class="p-button-raised p-button-rounded"
+        [disabled]="!form.valid"
+      ></button>
+    </div>
+  </form>
+</div>

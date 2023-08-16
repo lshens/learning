@@ -17,6 +17,7 @@ public interface TaskLogMapper {
     @Mapping(target = "categoryId", ignore = true)
     @Mapping(target = "inputTime", source = "time")
     @Mapping(target = "inputDate", source = "date")
+    @Mapping(target = "id", ignore = true)
     TaskLogPO to(TaskLogDTO log);
 
     @Mapping(target = "time", source = "inputTime")

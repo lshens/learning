@@ -1,26 +1,24 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login.component';
+import { ProfileFormComponent } from './profile-form.component';
 import { ButtonModule } from 'primeng-lts/button';
 import { InputTextModule } from 'primeng-lts/inputtext';
 import { BlockUIModule } from 'primeng-lts/blockui';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginRoutingModule } from './login-routing.module';
-import {MessagesModule} from 'primeng-lts/messages';
-import {MessageModule} from 'primeng-lts/message';
+import { ProfileFormRoutingModule } from './profile-form-routing.module';
+import { CalendarModule } from 'primeng-lts/calendar';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [ProfileFormComponent],
   imports: [
     CommonModule,
-    LoginRoutingModule,
+    ProfileFormRoutingModule,
     InputTextModule,
     ButtonModule,
     BlockUIModule,
     ReactiveFormsModule,
-    MessageModule,
-    MessagesModule
+    CalendarModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class LoginModule {}
+export class ProfileFormModule {}
